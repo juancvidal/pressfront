@@ -1,0 +1,8 @@
+#btn_crear{
+    background-color: #343a40;
+    border-color: #343a40;
+}
+#btn_crear:hover{
+    background-color: #666b71;
+    border-color: #666b71;
+}
