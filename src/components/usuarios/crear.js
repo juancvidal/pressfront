@@ -12,7 +12,7 @@ class CrearUsuario extends Component {
             "name": nombre.value,
             "email": email.value
         }        
-        this.props.crearUsuario(data, this.props.usuarios);
+        this.props.crearUsuario(data, this.props.usuarios, this.props.ultimo_id);
         
     }
     render() {       
@@ -29,8 +29,8 @@ class CrearUsuario extends Component {
                             <label htmlFor="name">Nombre</label>
                             <input id="name" type="text" className="form-control" placeholder="Nombre" />
                         </div>                        
-                        <button type="button" className="btn btn-primary" onClick={this.crear}>Guardar</button> 
-                        <Link className="btn btn-primary" to='/'>Cancelar</Link>                       
+                        <Link className="btn btn-primary btn_opts" onClick={this.crear} to='/'>Guardar</Link> 
+                        <Link className="btn btn-primary btn_opts" to='/'>Cancelar</Link>                       
                     </form>
                 </div>                
             </div>

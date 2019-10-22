@@ -7,17 +7,24 @@ import { Link } from 'react-router-dom';
 
 class Usuario extends Component {
 
-    componentDidMount() {
-        if(!this.props.creo_usuario){
+    componentDidMount() {        
+        if(!this.props.modifico_user){
             this.props.traerTodos();
         }       
     }
-
-    rowSelected = (index) => {        
+    rowSelected = (index) => {
         this.props.usuario_to_edit(index);
     }
 
-    showFilas = () =>
+    eliminar = (index) => {       
+        let data = {
+            "id": index
+        }
+        this.props.eliminarUsuario(data, this.props.usuarios);        
+    }
+
+    showFilas = () => 
+        //console.log(this.props.usuarios);
         this.props.usuarios.map((usuario, index) => (
             <tr key={usuario.id}>
                 <th scope="row">
@@ -33,12 +40,14 @@ class Usuario extends Component {
                     {usuario.email}
                 </td>
                 <td>
-                  <Link className="btn btn-primary ml-auto p-2 bd-highlight" onClick={() => {this.rowSelected(index+1)}} to='/editar'>editar</Link>
-                  <Link className="btn btn-primary ml-auto p-2 bd-highlight" to='/crear'>eliminar</Link>
+                  <Link className="btn btn-primary ml-auto p-2 bd-highlight btn_opts" to='/editar' onClick={() => {this.rowSelected(index)}}>editar</Link>
+                  <button type="button" className="btn btn-primary ml-auto p-2 bd-highlight btn_opts" onClick={() => {this.eliminar(index)} }>eliminar</button>
                 </td>
             </tr>
 
         ));
+    
+        
 
     showTable = () => {        
         if (this.props.cargando) {
@@ -62,12 +71,11 @@ class Usuario extends Component {
             )
         }
     }
-    render() {        
+    render() {           
         return (
             <div className="container">
                 <div className="d-flex bd-highlight mb-3">
-                    <h1>Usuarios</h1>
-                    {/*<button id="btn_crear" className="btn btn-primary ml-auto p-2 bd-highlight" type="button">Crear usuario</button>*/}
+                    <h1>Usuarios</h1>                    
                     <Link id="btn_crear" className="btn btn-primary ml-auto p-2 bd-highlight" to='/crear'>Crear usuario</Link>                    
                 </div>
                 <div className="row">                    

@@ -6,7 +6,17 @@ import * as usuariosActions from '../../actions/usuariosActions';
 class EditarUsuario extends Component {
 
     componentDidMount(){
-        console.log(this.props.edit_user);
+        
+    }
+    update = () => {        
+        let nombre = document.getElementById('name');
+        let email = document.getElementById('email');
+        let data = {
+            "id": this.props.edit_user + 1,
+            "name": nombre.value,
+            "email": email.value
+        }       
+        this.props.editarUsuario(data, this.props.usuarios);
     }
     render() {       
         return (
@@ -15,15 +25,14 @@ class EditarUsuario extends Component {
                     <form>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
-                            <input id="email" type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
-                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input id="email" type="email" className="form-control" aria-describedby="emailHelp" placeholder={this.props.usuarios[this.props.edit_user].email} defaultValue={this.props.usuarios[this.props.edit_user].email}/>                            
                         </div>
                         <div className="form-group">
                             <label htmlFor="name">Nombre</label>
-                            <input id="name" type="text" className="form-control" placeholder="Nombre" />
+                            <input id="name" type="text" className="form-control" placeholder={this.props.usuarios[this.props.edit_user].name} defaultValue={this.props.usuarios[this.props.edit_user].name}/>
                         </div>                        
-                        <button type="button" className="btn btn-primary" onClick={this.crear}>Guardar</button> 
-                        <Link className="btn btn-primary" to='/'>Cancelar</Link>                       
+                        <Link className="btn btn-primary btn_opts" to='/' onClick={this.update}>Guardar</Link> 
+                        <Link className="btn btn-primary btn_opts" to='/'>Cancelar</Link>                       
                     </form>
                 </div>                
             </div>
